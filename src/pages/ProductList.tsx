@@ -14,10 +14,10 @@ const ProductList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get('/Products').then(res => {
-      setProducts(res.data.products);
-    });
-  }, []);
+  api.get('/Products').then(res => {
+    setProducts(res.data);  // <-- LISTO!
+  });
+}, []);
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

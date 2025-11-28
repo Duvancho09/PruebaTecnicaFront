@@ -5,7 +5,7 @@ import api from '../services/api';
 
 interface ProductForm {
   productName: string;
-  categoryID: number;
+  categoryId: number;
   unitPrice: number;
   unitsInStock: number;
 }
@@ -19,16 +19,19 @@ const ProductEditForm = () => {
     api.get(`/Products/${id}`).then(res => {
       const p = res.data;
       setValue('productName', p.productName);
-      setValue('categoryID', p.categoryID);
+      setValue('categoryId', p.categoryId);
       setValue('unitPrice', p.unitPrice);
       setValue('unitsInStock', p.unitsInStock);
     });
   }, [id, setValue]);
 
   const onSubmit = async (data: ProductForm) => {
-    await api.put(`/Products/${id}`, data);
-    alert('Producto actualizado');
-    navigate('/products');
+    await api.put(`/Products/${id}`, {
+      productName: data.productName,
+      categoryId: Number(data.categoryId),
+      unitPrice: Number(data.unitPrice),
+      unitsInStock: Number(data.unitsInStock)
+});
   };
 
   return (
@@ -39,7 +42,7 @@ const ProductEditForm = () => {
           <input {...register('productName', { required: 'Nombre requerido' })} placeholder="Nombre" style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #ccc' }} />
         </div>
         <div style={{ marginBottom: 16 }}>
-          <input {...register('categoryID', { required: 'ID Categoría requerido', valueAsNumber: true })} placeholder="ID Categoría" style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #ccc' }} />
+          <input {...register('categoryId', { required: 'ID Categoría requerido', valueAsNumber: true })} placeholder="ID Categoría" />
         </div>
         <div style={{ marginBottom: 16 }}>
           <input {...register('unitPrice', { required: 'Precio requerido', valueAsNumber: true, min: { value: 0, message: 'Precio debe ser positivo' } })} placeholder="Precio" style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #ccc' }} />

@@ -11,7 +11,7 @@ const CategoryForm = () => {
 
   const onSubmit = async (data: CategoryForm) => {
     try {
-      const res = await api.post('/Category', data);
+      const res = await api.post('/Categories', data);
       alert('Categoría creada con ID: ' + res.data.id);
       reset();
     } catch (err) {

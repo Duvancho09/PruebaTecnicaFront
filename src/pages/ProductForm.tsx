@@ -40,7 +40,7 @@ const ProductForm = () => {
       reorderLevel: Number(data.reorderLevel),
       discontinued: Boolean(data.discontinued)
     };
-    await api.post('/Products', [payload]);
+    await api.post('/Products', payload);
     alert('Producto creado');
   };
 

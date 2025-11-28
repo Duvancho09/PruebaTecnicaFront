@@ -13,7 +13,9 @@ const Login = () => {
 
   const onSubmit = async (data: LoginForm) => {
     try {
-      const res = await api.post('/Auth/login', data);
+      const res = await api.post('/Auth/login', data, {
+        headers: { 'Content-Type': 'application/json' }
+      });
       localStorage.setItem('token', res.data.token);
       navigate('/products');
     } catch {
